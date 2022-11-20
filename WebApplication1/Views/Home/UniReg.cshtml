@@ -1,0 +1,27 @@
+@model University
+
+<form class="row g-3" asp-action="UniReg" asp-controller="Home">
+    <div class="col-md-6">
+        <label asp-for="Name" for="inputName" class="form-label">Name</label>
+        <input asp-for="Name" type="text" class="form-control" id="inputName" placeholder="Harvard University">
+    </div>
+    <div class="col-md-6">
+        <label asp-for="ShortName" for="inputSurname" class="form-label">Shortname</label>
+        <input asp-for="ShortName" type="text" class="form-control" id="inputSurname" placeholder="HU">
+    </div>
+    <div class="col-12">
+        <label asp-for="Description" for="inputDescription" class="form-label">Description</label>
+        <input asp-for="Description" type="text" class="form-control" id="inputDescription">
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Longitute" for="inputCourse" class="form-label">Longitute</label>
+        <input asp-for="Longitute" type="text" class="form-control" id="inputDescription">
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Latitude" for="inputDegree" class="form-label">Latitude</label>
+        <input asp-for="Latitude" type="text" class="form-control" id="inputDegree">
+    </div>
+    <div class="col-12">
+        <input class="btn btn-primary" type="submit" value="Register">
+    </div>
+</form>

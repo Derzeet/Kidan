@@ -1,0 +1,56 @@
+@{
+    ViewData["Title"] = "Register";
+}
+@model List<University>
+
+
+<form class="row g-3" asp-action="Register" asp-controller="Home">
+    <div class="col-md-6">
+        <label name="Name" for="inputName" class="form-label">Name</label>
+        <input name="Name" type="text" class="form-control" id="inputName" placeholder="Rick">
+    </div>
+    <div class="col-md-6">
+        <label name="Surname" for="inputSurname" class="form-label">Surname</label>
+        <input name="Surname" type="text" class="form-control" id="inputSurname" placeholder="Grimes">
+    </div>
+    <div class="col-3">
+        <label name="Date_Of_Birth" for="inputDate" class="form-label">Birthday</label>
+        <input name="Date_Of_Birth" type="date" class="form-control" id="inputDate">
+    </div>
+    <div class="col-md-3">
+        <label name="Course" for="inputCourse" class="form-label">Course</label>
+        <select name="Course" type="number" id="inputCourse" class="form-select">
+            <option selected>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+        </select>
+    </div>
+    <div class="col-6">
+        <label name="Degree" for="inputDegree" class="form-label">Degree</label>
+        <input name="Degree" type="text" class="form-control" id="inputDegree" placeholder="Software Engineer, Big Data etc.">
+    </div>
+    <div class="col-12">
+        <label name="Uni_Id" for="inputCourse" class="form-label">Course</label>
+        <select name="Uni_Id" id="inputCourse" class="form-select">
+            <option selected>None</option>
+            @foreach (var uni in Model)
+            {
+                <option>@uni.ShortName</option>
+            }
+        </select>
+    </div>
+    <div class="col-6">
+        <label name="Login" for="inputLogin" class="form-label">Login</label>
+        <input name="Login" type="text" class="form-control" id="inputLogin">
+    </div>
+    <div class="col-6">
+        <label name="Password" for="inputPassword" class="form-label">Password</label>
+        <input name="Password" type="password" class="form-control" id="inputPassword">
+    </div>
+    <div class="col-12">
+        <input class="btn btn-primary" type="submit" value="Register">
+    </div>
+</form>

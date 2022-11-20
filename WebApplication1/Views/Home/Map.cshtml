@@ -1,0 +1,47 @@
+@model List<University>
+<form>
+    
+</form>
+<div id="map" style="width: 100%; height: 400px"></div>
+
+<script type="text/javascript">
+const features = [];
+let i;
+for (i = 0; i < Unis.length; i++) {
+  features.push(new ol.Feature({
+          geometry: new ol.geom.Point(ol.proj.transform([Unis[i].Latitude, Unis[i].Longitude], 'EPSG:4326', new ol.source.OSM().getProjection()))
+        }));
+}
+
+
+// var imageStyle = new ol.style.Style({
+//             image: new ol.style.Circle({
+//             radius: 5,
+//             snapToPixel: false,
+//             fill: new ol.style.Fill({color: 'yellow'}),
+//             stroke: new ol.style.Stroke({color: 'red', width: 10})
+//             })
+// });
+        var observationsSourceVector = new ol.source.Vector({
+            features: features
+        });
+        var observationsVectorLayer = new ol.layer.Vector({
+            source: observationsSourceVector,
+        });
+
+        var map = new ol.Map({
+          target: 'map',
+          layers: [
+            new ol.layer.Tile({
+              source: new ol.source.OSM()
+            }),
+            observationsVectorLayer
+          ],
+          view: new ol.View({
+            center: ol.proj.transform([lat, long], 'EPSG:4326', new ol.source.OSM().getProjection()),
+            zoom: 10
+          })
+        });
+
+        map.render();
+</script>
