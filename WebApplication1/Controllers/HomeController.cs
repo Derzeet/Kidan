@@ -72,12 +72,16 @@ public class HomeController : Controller
 
     public IActionResult UniDetails(string? Uni_Id)
     {
+        ViewModel viewModel = new ViewModel();
         University university = db.Universities.Where(b => b.ShortName == Uni_Id).FirstOrDefault();
+        List<StatisticModel> stat =  university.Stat(db);
+        viewModel.University = university;
+        viewModel.Statistic = stat;
         if (university == null)
         {
             return Index();
         }
-        return View(university);
+        return View(viewModel);
     }
 
     public IActionResult DropModel(int? id)

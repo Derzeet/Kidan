@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
 
@@ -14,7 +15,7 @@ public class UniStatContext : DbContext
     {
         optionsBuilder.UseNpgsql("Server=localhost;Database=saske;Port=5432;User Id=postgres;Password=1844600");
     }
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseSerialColumns();

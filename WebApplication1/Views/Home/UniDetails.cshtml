@@ -1,17 +1,46 @@
 @{
-    ViewData["Title"] = @Model.ShortName;
+    ViewData["Title"] = @Model.University.ShortName;
 }
-@model University
+@model ViewModel
 
-<h3>@Model.Name</h3>
-<h5>@Model.Description</h5>
+<h3>@Model.University.Name</h3>
+<h5>@Model.University.Description</h5>
 <div id="map" style="width: 100%; height: 400px"></div>
-<a>University' location is @Model.Longitute, @Model.Latitude</a>
+<a>University' location is @Model.University.Longitute, @Model.University.Latitude</a>
+<h4>Statistics: </h4>
+
+<table class="table">
+  <thead >
+    <tr>
+        <th scope="col">Category</th>
+        <th scope="col">Max. Students</th>
+        <th scope="col">Min. Students</th>
+        <th scope="col">Avarage</th>
+        <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  @foreach (var i in @Model.Statistic)
+  {
+      <tr>
+          <th scope="row">@i.Category</th>
+          <td>@i.Maximum</td>
+          <td>@i.Minimum</td>
+          <td>@i.Avarage</td>
+          <td>@i.Total</td>
+      </tr>
+  }
+
+
+  </tbody>
+</table>
+
+
 
 
 <script type="text/javascript">
-var long = @Model.Longitute
-var lat = @Model.Latitude
+var long = @Model.University.Longitute
+var lat = @Model.University.Latitude
 var obsFeature = new ol.Feature({
             geometry : new ol.geom.Point(ol.proj.transform([lat, long], 'EPSG:4326', new ol.source.OSM().getProjection())),
             labelPoint: new ol.geom.Point(ol.proj.transform([lat, long], 'EPSG:4326', new ol.source.OSM().getProjection())),
