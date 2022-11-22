@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using Humanizer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using System.Web;
 
 namespace WebApplication1.Models;
 public class University 
@@ -13,7 +15,15 @@ public class University
     // public List<Student> Students { get; set; }
     public decimal Longitute { get; set; }
     public decimal Latitude { get; set; }
+    // public string Image { get; set; }
     public bool IsActive { get; set; } = true;
+
+
+    // public void SetModel(string shortname, string name, string description, decimal longitute, decimal latitute,
+    //     HttpPostedFileBase file)
+    // {
+    //     
+    // }
 
     public void GetModels(UniStatContext db, out List<University> universities) 
     {
@@ -36,10 +46,13 @@ public class University
             List<StatisticModel> stat = new List<StatisticModel>();
             StatisticModel fac = new StatisticModel();
             StatisticModel cor = new StatisticModel();
+            StatisticModel age = new StatisticModel();
             fac.Faculty(db, this);
             cor.Course(db, this);
+            age.Age(db, this);
             stat.Add(fac);
             stat.Add(cor);
+            stat.Add(age);
             return stat;
         }
 

@@ -34,9 +34,21 @@ body {
 table {
   background-color: #171616;
 }
-table thead th {
+th .sort {
   color: white;
 }
-table tbody td, th {
+table tbody td, th, .uni {
   color: #d4cbcb;
+}
+.uni, .delete, .sort {
+  text-decoration: none;
+}
+.uni:hover, .sort {
+  color: rgba(194, 194, 194, 0.7);
+}
+.delete {
+  color: #b01515;
+}
+.delete:hover {
+  color: #6e0909;
 }

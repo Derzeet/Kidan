@@ -13,8 +13,8 @@
   <thead >
     <tr>
         <th scope="col">Category</th>
-        <th scope="col">Max. Students</th>
-        <th scope="col">Min. Students</th>
+        <th scope="col">Max.</th>
+        <th scope="col">Min.</th>
         <th scope="col">Avarage</th>
         <th scope="col">Total</th>
     </tr>
@@ -50,14 +50,14 @@ var obsFeature = new ol.Feature({
 
         var features = new Array(1);
         features[0] = obsFeature;
-        var imageStyle = new ol.style.Style({
-            image: new ol.style.Circle({
-            radius: 5,
-            snapToPixel: false,
-            fill: new ol.style.Fill({color: 'yellow'}),
-            stroke: new ol.style.Stroke({color: 'red', width: 10})
-            })
-        });
+        // var imageStyle = new ol.style.Style({
+        //     image: new ol.style.Circle({
+        //     radius: 5,
+        //     snapToPixel: false,
+        //     fill: new ol.style.Fill({color: 'yellow'}),
+        //     stroke: new ol.style.Stroke({color: 'red', width: 10})
+        //     })
+        // });
         var observationsSourceVector = new ol.source.Vector({
             features: features
         });

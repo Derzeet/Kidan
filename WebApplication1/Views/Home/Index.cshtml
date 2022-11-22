@@ -7,13 +7,13 @@
 <table class="table">
   <thead >
     <tr>
-        <th scope="col">ID</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Course</th>
-        <th scope="col">University</th>
-        <th scope="col">Degree</th>
-        <th scope="col">Date of Birth</th>
+        <th scope="col"><a class="sort" asp-controller="Home" asp-action="Sort" asp-route-param="id">ID</a></th>
+        <th scope="col"><a class="sort" asp-controller="Home" asp-action="Sort" asp-route-param="first">First</a></th>
+        <th scope="col"><a class="sort" asp-controller="Home" asp-action="Sort" asp-route-param="last">Last</a></th>
+        <th scope="col"><a class="sort" asp-controller="Home" asp-action="Sort" asp-route-param="course">Course</a></th>
+        <th scope="col"><a class="sort" asp-controller="Home" asp-action="Sort" asp-route-param="uni">University</a></th>
+        <th scope="col"><a class="sort" asp-controller="Home" asp-action="Sort" asp-route-param="degree">Degree</a></th>
+        <th scope="col"><a class="sort" asp-controller="Home" asp-action="Sort" asp-route-param="date">Date of Birth</a></th>
         <th scope="col"></th>
     </tr>
   </thead>
@@ -29,10 +29,10 @@
                   <td>@Student.Name</td>
                   <td>@Student.Surname</td>
                   <td>@Student.Course</td>
-                  <td><a asp-controller="Home" asp-action="UniDetails" asp-route-Uni_Id=@Student.Uni_Id>@Student.Uni_Id</a></td>
+                  <td><a class="uni" asp-controller="Home" asp-action="UniDetails" asp-route-Uni_Id=@Student.Uni_Id>@Student.Uni_Id</a></td>
                   <td>@Student.Degree</td>
                   <td>@Student.Date_Of_Birth</td>
-                  <td><a asp-controller="Home" asp-action="DropModel" asp-route-id=@Student.Id>Delete</a></td>
+                  <td><a class="delete" asp-controller="Home" asp-action="DropModel" asp-route-id=@Student.Id>&#10005;</a></td>
               </tr>
           }
       }

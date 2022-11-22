@@ -1,47 +1,43 @@
 @model List<University>
-<form>
-    
-</form>
-<div id="map" style="width: 100%; height: 400px"></div>
+<h2>University Map</h2>
+<div id="map" class="singleclick" style="width: 100%; height: 400px"></div>
 
-<script type="text/javascript">
-const features = [];
-let i;
-for (i = 0; i < Unis.length; i++) {
-  features.push(new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.transform([Unis[i].Latitude, Unis[i].Longitude], 'EPSG:4326', new ol.source.OSM().getProjection()))
-        }));
+<script>
+ features = []
+</script>
+@foreach (var i in Model)
+{
+    <script>
+    var long = '@i.Longitute'
+    var lat = '@i.Latitude'
+    features.push(new ol.Feature({
+                geometry : new ol.geom.Point(ol.proj.transform([lat, long], 'EPSG:4326', new ol.source.OSM().getProjection())),
+                labelPoint: new ol.geom.Point(ol.proj.transform([lat, long], 'EPSG:4326', new ol.source.OSM().getProjection())),
+                name: 'My Point',
+                size : 10
+    }));
+    
+    </script>
 }
 
-
-// var imageStyle = new ol.style.Style({
-//             image: new ol.style.Circle({
-//             radius: 5,
-//             snapToPixel: false,
-//             fill: new ol.style.Fill({color: 'yellow'}),
-//             stroke: new ol.style.Stroke({color: 'red', width: 10})
-//             })
-// });
-        var observationsSourceVector = new ol.source.Vector({
-            features: features
-        });
-        var observationsVectorLayer = new ol.layer.Vector({
+<script type="text/javascript">
+var observationsSourceVector = new ol.source.Vector({
+            features
+});
+var observationsVectorLayer = new ol.layer.Vector({
             source: observationsSourceVector,
-        });
-
-        var map = new ol.Map({
-          target: 'map',
-          layers: [
-            new ol.layer.Tile({
-              source: new ol.source.OSM()
-            }),
-            observationsVectorLayer
-          ],
-          view: new ol.View({
-            center: ol.proj.transform([lat, long], 'EPSG:4326', new ol.source.OSM().getProjection()),
-            zoom: 10
-          })
-        });
-
-        map.render();
+});
+ var map = new ol.Map({
+     layers: [
+         new ol.layer.Tile({
+                       source: new ol.source.OSM()
+         }), observationsVectorLayer
+     ],
+     target: 'map',
+     view: new ol.View({
+         center: ol.proj.transform(['@Model[0].Latitude', '@Model[0].Longitute'], 'EPSG:4326', new ol.source.OSM().getProjection()),
+         maxZoom: 18,
+         zoom: 15
+     })
+ })
 </script>

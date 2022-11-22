@@ -13,15 +13,34 @@
         <label asp-for="Description" for="inputDescription" class="form-label">Description</label>
         <input asp-for="Description" type="text" class="form-control" id="inputDescription">
     </div>
-    <div class="col-md-6">
-        <label asp-for="Longitute" for="inputCourse" class="form-label">Longitute</label>
+    @* <div class="col-md-4"> *@
+    @*     <label asp-for="Image" for="inputImage" class="form-label">Image</label> *@
+    @*     <input asp-for="Image" type="file" class="form-control" id="inputImage"> *@
+    @* </div> *@
+    <div class="col-md-4">
+        <label asp-for="Longitute" id="lon" for="inputCourse" class="form-label">Longitute</label>
         <input asp-for="Longitute" type="text" class="form-control" id="inputDescription">
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <label asp-for="Latitude" for="inputDegree" class="form-label">Latitude</label>
         <input asp-for="Latitude" type="text" class="form-control" id="inputDegree">
     </div>
+    <div id="map"  style="width: 100%; height: 400px"></div>
     <div class="col-12">
         <input class="btn btn-primary" type="submit" value="Register">
     </div>
 </form>
+<script>
+var map = new ol.Map({
+     layers: [
+         new ol.layer.Tile({
+                       source: new ol.source.OSM()
+         })
+     ],
+     target: 'map',
+     view: new ol.View({
+         maxZoom: 18,
+         zoom: 15
+     })
+ })
+</script>

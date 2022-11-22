@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Dynamic;
 using System.Net;
+using System.Net.Security;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Data;
 using WebApplication1.Models;
@@ -29,22 +31,30 @@ public class HomeController : Controller
         var universities = db.Universities.ToList();
         return View("Register", universities);
     }
+
     [HttpPost]
     public IActionResult Register(string Name, string Surname, string Date_Of_Birth, int Course, string Degree, string Uni_Id, string Login, string Password)
     {
         Student student = new Student();
         student.SetModel(Name, Surname, Course, Degree, Date_Of_Birth, Uni_Id, Login, Password);
-        db.Students.Add(student); 
+        db.Students.Add(student);
+        // var result = Authenticate(student);
         db.SaveChanges();
         
         return RedirectToAction("Index");
     }
+    
+    public IActionResult Login()
+    {
+        throw new NotImplementedException();
+    }
 
     public IActionResult Map()
     {
-        University uni = new University();
-        List<University> universities = new List<University>();
-        uni.GetModels(db, out universities);
+        // University uni = new University();
+        // List<University> universities = new List<University>();
+        // uni.GetModels(db, out universities);
+        List<University> universities = db.Universities.ToList();
         return View("Map", universities);
     }
 
@@ -86,26 +96,53 @@ public class HomeController : Controller
 
     public IActionResult DropModel(int? id)
     {
-        
+
         Student student = db.Students.SingleOrDefault(b => b.Id == id);
         if (student != null)
         {
-            student.DropModel(); 
+            student.DropModel();
             db.SaveChanges();
         }
 
         return RedirectToAction("Index");
     }
     
-    
-    
-    
-    
-    
-    
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    public IActionResult Sort(string? param)
+    {
+        var Students = db.Students.ToList();
+        switch (param)
+        {
+            case "id":
+                Students = Students.OrderBy(s => s.Id).ToList();
+                break;
+            case "first":
+                Students = Students.OrderBy(s => s.Name).ToList();
+                break;
+            case "last":
+                Students = Students.OrderBy(s => s.Surname).ToList();
+                break;
+            case "course":
+                Students = Students.OrderBy(s => s.Course).ToList();
+                break;
+            case "degree":
+                Students = Students.OrderBy(s => s.Degree).ToList();
+                break;
+            case "uni":
+                Students = Students.OrderBy(s => s.Uni_Id).ToList();
+                break;
+            case "date":
+                Students = Students.OrderBy(s => s.Date_Of_Birth).ToList();
+                break;
+            default:
+                break;
+        }
+        return View("Index", Students);
+    }
+    
 }
